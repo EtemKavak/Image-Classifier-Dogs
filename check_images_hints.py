@@ -1,27 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# */AIPND/intropylab-classifying-images/check_images_hints.py
-#                                                                             
-# TODO: 0. Fill in your information in the programming header below
+# */AIPND/intropylab-classifying-images/check_images_hints.py                                                            
+
 # PROGRAMMER: Freena Wang
 # DATE CREATED: 6/4/2018
 # REVISED DATE:             <=(Date Revised - if any)
-# PURPOSE: This Version of check_images.py is designed to provide students with
-#          more "hints" regarding the solution. This version is specifically 
-#          for students that are:
-#          - NEW to using Python and programming in general,
-#          - Less comforatable with programming in Python, and/or
-#          - Have less time to devote to this Lab.
-#          For a more challenging lab - edit check_images.py instead of this 
-#          file. Additionally, if you get stuck working on the more 
-#          challenging check_images.py file; you are encouraged to refer
-#          back to this check_images_hints.py file for some helpful hints.
-#
-#          Check images & report results: read them in, predict their
-#          content (classifier), compare prediction to actual value labels
-#          and output results
+# PURPOSE:
 #          
-#
 # Use argparse Expected Call with <> indicating expected user input:
 #      python check_images_novice.py --dir <directory with images> --arch <model>
 #             --dogfile <file that contains dognames>
@@ -42,48 +27,49 @@ from print_functions_for_lab_checks import *
 
 # Main program function defined below
 def main():
-    # TODO: 1. Define start_time to measure total program runtime by
-    # collecting start time
-    start_time = None
+    # 1. set start time
+    start_time = time()
     
-    # TODO: 2. Define get_input_args() function to create & retrieve command
+    # 2. Define get_input_args() function to create & retrieve command
     # line arguments
     in_arg = get_input_args()
     
-    # TODO: 3. Define get_pet_labels() function to create pet image labels by
+    # 3. Define get_pet_labels() function to create pet image labels by
     # creating a dictionary with key=filename and value=file label to be used
     # to check the accuracy of the classifier function
     answers_dic = get_pet_labels(in_arg.dir)
 
-    # TODO: 4. Define classify_images() function to create the classifier 
+    # 4. Define classify_images() function to create the classifier 
     # labels with the classifier function uisng in_arg.arch, comparing the 
     # labels, and creating a dictionary of results (result_dic)
     result_dic = classify_images(in_arg.dir, answers_dic, in_arg.arch)
     
-    # TODO: 5. Define adjust_results4_isadog() function to adjust the results
+    # 5. Define adjust_results4_isadog() function to adjust the results
     # dictionary(result_dic) to determine if classifier correctly classified
     # images as 'a dog' or 'not a dog'. This demonstrates if the model can
     # correctly classify dog images as dogs (regardless of breed)
     adjust_results4_isadog(result_dic, in_arg.dogfile)
 
-    # TODO: 6. Define calculates_results_stats() function to calculate
+    # 6. Define calculates_results_stats() function to calculate
     # results of run and puts statistics in a results statistics
     # dictionary (results_stats_dic)
     results_stats_dic = calculates_results_stats(result_dic)
 
-    # TODO: 7. Define print_results() function to print summary results, 
+    # 7. Define print_results() function to print summary results, 
     # incorrect classifications of dogs and breeds if requested.
     print_results(result_dic, results_stats_dic, in_arg.arch, True, True)
 
-    # TODO: 1. Define end_time to measure total program runtime
-    # by collecting end time
-    end_time = None
+    # 8. set the end_time
+    sleep(75) # temp code to simulate the timing code
+    end_time = time()
 
-    # TODO: 1. Define tot_time to computes overall runtime in
-    # seconds by replacing zero with a the mathematical calculation that 
-    # computes overall runtime
+    # 9: set tot_time to computes overall runtime 
+    tot_time = end_time - start_time
     # The print statement prints Overall runtime in hh:mm:ss format
-    tot_time = 0
+    # hours = int(tot_time / 3600))
+    # minutes = int(((tot_time % 3600) / 60))
+    # seconds = int(((tot_time % 3600) % 60))
+    print("\n** Total Elapsed Runtime:", tot_time, "in seconds.")
     print("\n** Total Elapsed Runtime:",
           str(int((tot_time/3600)))+":"+str(int((tot_time%3600)/60))+":"
           +str(int((tot_time%3600)%60)) )
@@ -657,7 +643,6 @@ def print_results(results_dic, results_stats, model,
                 results_dic[key][2] == 0 ):
                 print("Real: %-26s   Classifier: %-30s" % (results_dic[key][0],
                                                           results_dic[key][1]))
-
                 
                 
 # Call to main function to run the program
