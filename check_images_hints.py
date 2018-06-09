@@ -4,18 +4,11 @@
 
 # PROGRAMMER: Freena Wang
 # DATE CREATED: 6/4/2018
-# REVISED DATE:             <=(Date Revised - if any)
-# PURPOSE:
-#          
-# Use argparse Expected Call with <> indicating expected user input:
-#      python check_images_novice.py --dir <directory with images> --arch <model>
-#             --dogfile <file that contains dognames>
-#   Example call:
-#    python check_images_hints.py --dir pet_images/ --arch vgg --dogfile dognames.txt
+# python check_images_hints.py --dir pet_images/ --arch vgg --dogfile dognames.txt
 ##
 
 # Imports python modules
-import argparse
+import argparse  
 from time import time, sleep
 from os import listdir
 
@@ -33,6 +26,8 @@ def main():
     # 2. Define get_input_args() function to create & retrieve command
     # line arguments
     in_arg = get_input_args()
+    # temp code to test
+    print("Commond Line Argument: \n  dir =", in_args.dir, " \n  arch=", in_args.arch, "\n dogfile =", in_args.dogfile)
     
     # 3. Define get_pet_labels() function to create pet image labels by
     # creating a dictionary with key=filename and value=file label to be used
@@ -74,14 +69,6 @@ def main():
           str(int((tot_time/3600)))+":"+str(int((tot_time%3600)/60))+":"
           +str(int((tot_time%3600)%60)) )
 
-
-
-# TODO: 2.-to-7. Define all the function below. Notice that the input 
-# paramaters and return values have been left in the function's docstrings. 
-# This is to provide guidance for acheiving a solution similar to the 
-# instructor provided solution. Feel free to ignore this guidance as long as 
-# you are able to acheive the desired outcomes with this lab.
-
 def get_input_args():
     """
     Retrieves and parses the command line arguments created and defined using
@@ -92,29 +79,20 @@ def get_input_args():
        arch - CNN model architecture to use for image classification(default-
               pick any of the following vgg, alexnet, resnet)
        dogfile - Text file that contains all labels associated to dogs(default-
-                'dognames.txt'
-    Parameters:
-     None - simply using argparse module to create & store command line arguments
-    Returns:
-     parse_args() -data structure that stores the command line arguments object  
+                'dognames.txt'  
     """
-    # Creates parse 
+    # Creates Argument Parser object named parser
     parser = argparse.ArgumentParser()
-
-    # Creates 3 command line arguments args.dir for path to images files,
-    # args.arch which CNN model to use for classification, args.labels path to
-    # text file with names of dogs.
     parser.add_argument('--dir', type=str, default='pet_images/', 
                         help='path to folder of images')
-    # TODO: 2. EDIT parse.add_argument statements BELOW to add type & help for:
-    #          --arch - the CNN model architecture
-    #          --dogfile - text file of names of dog breeds
-    parser.add_argument('--arch', default = 'vgg' )
-    parser.add_argument('--dogfile', default = 'dognames.txt' )
-
-
+    parser.add_argument('--arch', type=str, default = 'vgg',
+                       help = 'Chosen model')
+    parser.add_argument('--dogfile', default = 'dognames.txt', type=str,
+                       help = 'text file of names of dog names' )
+    
     # returns parsed argument collection
     return parser.parse_args()
+
 
 
 def get_pet_labels(image_dir):
