@@ -1,5 +1,5 @@
 
-
+"""
 ########### 1. Imports python modules ##########
 
 from time import time, sleep
@@ -47,7 +47,7 @@ args = parser.parse_args()
 # Accesses values of Arguments 1 and 2 by printng them
 print("Argument 1:", args .dir, " Argument 2:", args .num)
 
-
+"""
 ########## 3. Creating Pet Image Labels ##########
 
 # 3.1 Reading files from a folder
@@ -88,4 +88,35 @@ print("\n Printing all key-value pairs in dict pet_dic")
 for key in pet_dic:
 	print("key=", key, "  Value=", pet_dic[key])
 
+# 3.3 Creating pet image labels from filenames
 
+"""
+lower() -- places letters in lower case only
+split() -- returns a list of words from a string ( delimiter or whitespace)
+strip() -- returns string with leading & trailing characters removed
+isalpha() -- returns true only when string contains only alphabetic characters, returns false otherwise
+"""
+
+# set pet_image variable to a filename
+pet_image = "Boston_terrier_02259.jpg"
+
+# set string to lower case letters
+low_pet_image = pet_image.lower()
+
+# splits lower case string by _ to break into words
+word_list_pet_image = low_pet_image.split("_")
+
+# create pet_name starting as empty string
+pet_name = ""
+
+# loop to check if word in pet name is only alphabetic characters and append
+
+for word in word_list_pet_image:
+	if word.isalpha():
+		pet_name += word + " "
+
+# strip off starting/trailing witespace characters
+pet_name = pet_name.strip()
+
+# print resulting pet_name
+print("\nFilename =", pet_image, "   Label=", pet_name)
