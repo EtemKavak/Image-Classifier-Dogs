@@ -1,6 +1,6 @@
 
 
-# 1. Imports python modules
+########### 1. Imports python modules ##########
 
 from time import time, sleep
 
@@ -25,7 +25,7 @@ print("\n** Total Elapsed Runtime:",
 	+ str(int((tot_time%3600)%60)) )
 
 
-# 2. Command Line Arguments
+############ 2. Command Line Arguments ##########
 
 # a module that makes it easy to write user-friendly command line interfaces for command line arguments
 import argparse
@@ -48,5 +48,44 @@ args = parser.parse_args()
 print("Argument 1:", args .dir, " Argument 2:", args .num)
 
 
+########## 3. Creating Pet Image Labels ##########
+
+# 3.1 Reading files from a folder
+
+# import only the listdir function from OS
+from os import listdir
+
+# retrieve the filenames from folder pet_images/
+filename_list = listdir("pet_images/")
+
+print("\nPrints 10 filenames from folder pet_images/")
+
+for idx in range(0,10,1):
+	print("%2d file: %-25s" % (idx + 1, filename_list[idx]))
+
+# 3.2 Dictionary for pet image filenames and labels
+
+# create empty dict named pet_dic
+pet_dic = dict() 
+
+# determines number of items in dict
+items_in_dic = len(pet_dic)
+print("\nEmpty Dictionary pet_dic - n items=", items_in_dic)
+
+# add key_value pairs to dictotionary ONLY when key doesn't already exist
+keys = ["beagle_0239.jpg", "Boston_terrier_02259.jpg"]
+values = ["beagle", "boston terrier"]
+
+for idx in range(0, len(keys), 1):
+	if keys[idx] not in pet_dic:
+		pet_dic[keys[idx]] = values[idx]
+	else:
+		print("** Warning: Key=", keys[idx],
+			"already exists in pet_dict pet_dic:")
+
+# iterating through a dict printing all keys & their associated values
+print("\n Printing all key-value pairs in dict pet_dic")
+for key in pet_dic:
+	print("key=", key, "  Value=", pet_dic[key])
 
 
