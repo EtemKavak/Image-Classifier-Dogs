@@ -1,5 +1,5 @@
 
-"""
+
 ########### 1. Imports python modules ##########
 
 from time import time, sleep
@@ -47,7 +47,7 @@ args = parser.parse_args()
 # Accesses values of Arguments 1 and 2 by printng them
 print("Argument 1:", args .dir, " Argument 2:", args .num)
 
-"""
+
 ########## 3. Creating Pet Image Labels ##########
 
 # 3.1 Reading files from a folder

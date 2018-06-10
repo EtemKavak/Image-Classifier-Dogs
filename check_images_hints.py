@@ -23,8 +23,7 @@ def main():
     # 1. set start time
     start_time = time()
     
-    # 2. Define get_input_args() function to create & retrieve command
-    # line arguments
+    # 2. Define get_input_args() function to create & retrieve command line arguments
     in_arg = get_input_args()
     # temp code to test
     print("Commond Line Argument: \n  dir =", in_args.dir, " \n  arch=", in_args.arch, "\n dogfile =", in_args.dogfile)
@@ -33,6 +32,16 @@ def main():
     # creating a dictionary with key=filename and value=file label to be used
     # to check the accuracy of the classifier function
     answers_dic = get_pet_labels(in_arg.dir)
+    
+    # temp code to print 10 key-value paris to check
+    print("\nanswers_dic has", len(answers_dic),
+          "key-value pairs.\nBelow are 10 of them:")
+    prnt = 0
+    for key in answers_dic:
+        if prnt < 10:
+            print("%2d key: %-30s  label: %-26s" % (prnt+1, key, answers_dic[key]))
+            prnt += 1
+            
 
     # 4. Define classify_images() function to create the classifier 
     # labels with the classifier function uisng in_arg.arch, comparing the 
@@ -72,8 +81,7 @@ def main():
 def get_input_args():
     """
     Retrieves and parses the command line arguments created and defined using
-    the argparse module. This function returns these arguments as an
-    ArgumentParser object. 
+    the argparse module. 
      3 command line arguements are created:
        dir - Path to the pet image files(default- 'pet_images/')
        arch - CNN model architecture to use for image classification(default-
@@ -120,30 +128,25 @@ def get_pet_labels(image_dir):
     # Processes through each file in the directory, extracting only the words
     # of the file that contain the pet image label
     for idx in range(0, len(in_files), 1):
-       
-       # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
-       # isn't an pet image file
-       if in_files[idx][0] != ".":
-           
-           # Creates temporary label variable to hold pet label name extracted 
-           pet_label = ""
-
-           # TODO: 3. BELOW REPLACE pass with CODE that will process each 
-           #          filename in the in_files list to extract the dog breed 
-           #          name from the filename. Recall that each filename can be
-           #          accessed by in_files[idx]. Be certain to place the 
-           #          extracted dog breed name in the variable pet_label 
-           #          that's created as an empty string ABOVE
-           pass
+        # Skips file if starts with . (like .DS_Store of Mac OSX) because it isn't an pet image file
+        if in_files[idx][0] != ".":
+            # use split to extract words of filename into list image_name
+            image_name = in_files[idx].split("_")
+            # Creates temporary label variable to hold pet label name extracted 
+            pet_label = ""
+            for word in image_name:
+                if word.isalpha():
+                    pet_label += word.lower() + "" # only add if word is all letters and blank at end
+            # strips off trailing whitespace
+            pet_label = pet_label.strip()
 
            # If filename doesn't already exist in dictionary add it and it's
            # pet label - otherwise print an error message because indicates 
            # duplicate files (filenames)
-           if in_files[idx] not in petlabels_dic:
-              petlabels_dic[in_files[idx]] = pet_label
-              
-           else:
-               print("Warning: Duplicate files exist in directory", 
+            if in_files[idx] not in petlabels_dic:
+                petlabels_dic[in_files[idx]] = pet_label
+            else:
+                print("Warning: Duplicate files exist in directory", 
                      in_files[idx])
  
     # returns dictionary of labels
