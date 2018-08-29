@@ -503,13 +503,15 @@ def print_results(results_dic, results_stats, model,
           "***")
     print("%20s: %3d" % ('N Images', results_stats['n_images']))
     print("%20s: %3d" % ('N Dog Images', results_stats['n_dogs_img']))
+    print("%20s: %3d" % ('N Not-Dog Images', results_stats['n_notdogs_img']))
+
 
 
     # Prints summary statistics (percentages) on Model Run
     print(" ")
     for key in results_stats:
         if key[0] == 'p':  # print only the percentage
-            print("%20s: %5.1f" & (key, results_stats[key]))
+            print("%20s: %5.1f" % (key, results_stats[key]))
 
     # IF print_incorrect_dogs == True AND there were images incorrectly 
     # classified as dogs or vice versa - print out these cases
@@ -525,7 +527,7 @@ def print_results(results_dic, results_stats, model,
             # Pet image label is a Dog -- Classified as NOT-A_DOG  -OR-
             # Pet image label is NOT-a-Dog - Classified as a-DOG
             if sum(results_dic[key][3:]) == 1:
-                print("Real: %-26s   Classifier: %-30s" % (results_dic[key][0], result_dic[key][1]))
+                print("Real: %-26s   Classifier: %-30s" % (results_dic[key][0], results_dic[key][1]))
 
 
     # IF print_incorrect_breed == True AND there were dogs whose breeds 
